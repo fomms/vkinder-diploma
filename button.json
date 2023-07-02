@@ -1,0 +1,40 @@
+{
+  "one_time": false,
+  "buttons": [
+    [{
+      "action": {
+        "type": "text",
+        "label": "NEXT"
+      },
+      "color": "primary"
+    }],
+      [{
+        "action": {
+          "type": "text",
+          "label": "ADD_TO_FAVOURITE"
+        },
+        "color": "positive"
+    },
+      {
+        "action": {
+          "type": "text",
+          "label": "ADD_TO_BLACK_LIST"
+        },
+        "color": "negative"
+      }],
+    [{
+      "action": {
+        "type": "text",
+        "label": "SHOW_FAVOURITE"
+      },
+      "color": "secondary"
+    },
+      {
+        "action": {
+          "type": "text",
+          "label": "SHOW_BLACK_LIST"
+        },
+        "color": "secondary"
+      }]
+  ]
+}
