@@ -7,8 +7,8 @@ class UserVKTinder(Base):
 
     __tablename__ = 'UserVKTinder'
 
-    user_vktinder_id = sq.Column(sq.Integer, primary_key=True)
-    user_vk_id = sq.Column(sq.Integer, unique=True)
+    user_vktinder_id = sq.Column(sq.Integer)
+    user_vk_id = sq.Column(sq.Integer, unique=True, primary_key=True)
     user_vktinder_name = sq.Column(sq.String(length=20))
     user_vktinder_surname = sq.Column(sq.String(length=30))
     user_vktinder_age = sq.Column(sq.Integer)
@@ -25,7 +25,7 @@ class SearhPair(Base):
     searh_pair_page_link = sq.Column(sq.String)
     searh_pair_vk_id = sq.Column(sq.Integer)
     attribute = sq.Column(sq.Integer)
-    user_vktinder_id = sq.Column(sq.Integer, sq.ForeignKey("UserVKTinder.user_vktinder_id"))
+    user_vktinder_id = sq.Column(sq.Integer, sq.ForeignKey("UserVKTinder.user_vk_id"))
     UserVKTinder = relationship(UserVKTinder, backref="SearhPair")
 
     def __str__(self):

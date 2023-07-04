@@ -1,8 +1,7 @@
 import vk_api
 from vk_api.longpoll import VkLongPoll, VkEventType
 from random import randrange
-from VKapi import VKapi
-
+from tokens import group_token
 
 class VKbot:
 
