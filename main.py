@@ -8,10 +8,11 @@ import time
 vkbot = VKbot(group_token)  # создаем экземляр класса бота
 vkbot.get_started()  # пускаем первый лонгпол который получает айди
 min_age, max_age = vkbot.get_info()  # получаем границы возраста
+sex = vkbot.get_sex()# получаем пол
 city = vkbot.get_city()  # получаем город
 vkapi = VKAPIusers(min_age, max_age, city, sex=1)  # создаем экземляр класса пользователей приложения для примененния к ним методов поиска
 search_users = vkapi.search_users()  # вызов метода поиска к пользовательлю 1
-parse_users_vk_list(search_users, vkbot.user_id)  # вызов функции наполнения БД текущего юзера
+parse_users_vk_list(vkbot.user_id)  # вызов функции наполнения БД текущего юзера
 add_new(search_users, vkbot.user_id)  # довавляем найденных кандидатов для предложения юзеру в БД
 pair = get_searh_pair_info(session, vkbot.user_id)  # извекаем кандидатов для предложения юзеру, возвращает объект итератор
 i = PeopleIterator(pair)  # Создаём первичный экземпляр иторатора

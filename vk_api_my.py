@@ -24,7 +24,7 @@ class VKAPIusers(VKAPIparent):
         return {
             'age_from': self.age_from,
             'age_to': self.age_to,
-            'city': self.city,
+            'hometown': self.city,
             'sex': self.sex,
             'status': 1,
             'count': 3,

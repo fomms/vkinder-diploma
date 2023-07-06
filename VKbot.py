@@ -57,6 +57,15 @@ class VKbot:
                 else:
                     max_age = event.text
                     return min_age, max_age
+    
+    def get_sex(self):  #метод получающий пол человека для поиска
+        self.send_message(message='Введите пол человека которого хотите найти(мужской\женский):')
+        for event in self.longpoll.listen():
+            if event.type == VkEventType.MESSAGE_NEW and event.to_me:
+                sex = event.text
+                if sex.lower() == 'женский':
+                    return 1
+                return 2
 
     def get_city(self):  #метод получающий город поиска
         self.send_message(message='Введите город поиска:')

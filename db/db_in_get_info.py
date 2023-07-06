@@ -1,15 +1,12 @@
 import sqlalchemy
 from sqlalchemy.orm import sessionmaker
+# from db.models import create_tables
 from db.models import create_tables
 from db.models import UserVKTinder, SearhPair, SearhPairPhoto
 from vk_api_my import VKAPIusers
 from VKbot import VKbot
-from tokens import Password_db
-
-# from token_1 import Login_db, Password_db, Name_db
+from tokens import Login_db, Password_db, Name_db
 # import json
-Login_db = 'postgres'
-Name_db = 'test'
 # Loin_db = os.getenv('Login_db')
 # Password_db = os.getenv('Password_db')
 DSN = f"postgresql://{Login_db}:{Password_db}@localhost:5432/{Name_db}"
@@ -18,7 +15,7 @@ create_tables(engine) # создание таблиц
 Session = sessionmaker(bind=engine)
 session = Session() #создание текущей сессии (в объявлениях функций передается как connection)
 
-def parse_users_vk_list(searh_users, id):
+def parse_users_vk_list(id):
     ''' Функция наполнения базы данных, на вход принимает vk id пользователя приложения и список словарей из с данными поиска.
     Функция преобразует каждого пользователя в экземпляры класса в соответсвии смоделями БД и передает их в БД ге они записываются в  таблицы по аттрибуттам'''
     info_list = VKAPIusers.get_vktinder_user(id) #получение данных о пользователе приложением из вк апи по его id(функция вызывается из модуля vk_api_my)
