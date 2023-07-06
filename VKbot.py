@@ -26,6 +26,18 @@ class VKbot:
             attachment=attachment
         )
 
+    def send_candidate(self, candidate):
+        if candidate[4] is None and candidate[5] is None:
+            self.send_message(self.user_id, message=f'{candidate[0]} {candidate[1]} \n {candidate[2]} \n ',
+                               attachment=candidate[3])  # отправляем кандидата пользователю
+        elif candidate[5] is None:
+            self.send_message(self.user_id, message=f'{candidate[0]} {candidate[1]} \n {candidate[2]} \n ',
+                               attachment=','.join(candidate[3:4]))  # отправляем кандидата пользователю
+        else:
+            self.send_message(self.user_id, message=f'{candidate[0]} {candidate[1]} \n {candidate[2]} \n ',
+                               attachment=','.join(candidate[3:5]))  # отправляем кандидата пользователю
+
+
     def get_started(self):  #метод начинающющий взаимодействие с человеком и получчающая его ID
         for event in self.longpoll.listen():
             if event.type == VkEventType.MESSAGE_NEW and event.to_me:

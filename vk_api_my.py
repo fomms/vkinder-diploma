@@ -27,7 +27,7 @@ class VKAPIusers(VKAPIparent):
             'city': self.city,
             'sex': self.sex,
             'status': 1,
-            'count': 3,
+            'count': 10,
             'has_photo': 1,
             'offset': self.offset
             }
@@ -38,7 +38,7 @@ class VKAPIusers(VKAPIparent):
 
     def get_user_photo(self, id):  # метод получения фотографий пользователя)
         photo_list = []
-        photos = self.session.method('photos.get', {'owner_id': id, 'album_id': 'profile', 'photo_sizes': 1, 'count': 10, 'extended': 1})
+        photos = self.session.method('photos.get', {'owner_id': id, 'album_id': 'profile', 'photo_sizes': 1, 'count': 500, 'extended': 1})
         for photo in photos["items"]:
             photo_dict = {
                 'photo_link': photo["sizes"][-1]["url"],

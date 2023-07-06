@@ -101,6 +101,13 @@ def get_list_likes_pair(connection, user_vk_id):
                     SearhPairPhoto.photo_1, SearhPairPhoto.photo_2, SearhPairPhoto.photo_3).join(SearhPair).join(UserVKTinder).filter(UserVKTinder.user_vk_id == user_vk_id, SearhPair.attribute == 1).all() 
     return list_likes_pair
 
+def get_list_blocked_pair(connection, user_vk_id):
+    '''Функция получения информации о пользователях для выдачи в приложении добавленных в список заблокированных (имеющих attribute == 2)
+    Принимает на вход связь с БД т.е сессию(session) и VK id пользователя приложения. Возвращает список.'''
+    list_blocked_pair = connection.query(SearhPair.searh_pair_name, SearhPair.searh_pair_surname, SearhPair.searh_pair_page_link,
+                    SearhPairPhoto.photo_1, SearhPairPhoto.photo_2, SearhPairPhoto.photo_3).join(SearhPair).join(UserVKTinder).filter(UserVKTinder.user_vk_id == user_vk_id, SearhPair.attribute == 2).all()
+    return list_blocked_pair
+
 
 # print(get_list_likes_pair(session, 301065560)) #проверка работы функции по извлечению информации о понравишихся людях
 
