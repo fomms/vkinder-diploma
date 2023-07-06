@@ -27,7 +27,7 @@ class VKAPIusers(VKAPIparent):
             'city': self.city,
             'sex': self.sex,
             'status': 1,
-            'count': 10,
+            'count': 3,
             'has_photo': 1,
             'offset': self.offset
             }

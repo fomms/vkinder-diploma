@@ -37,7 +37,8 @@ def add_new(searh_users, id):
                 searh_pair_surname = user["surname"], 
                 searh_pair_page_link = user["page_link"],
                 searh_pair_vk_id = user["id"],
-                user_vktinder_id = id # здесь происходит связывание искомого человека с тем кто его ищет (один ко многим)
+                user_vktinder_id = id, # здесь происходит связывание искомого человека с тем кто его ищет (один ко многим)
+                attribute=0
                 )
         objects_list.append(info)
         session.add_all(objects_list)
@@ -62,19 +63,19 @@ def get_searh_pair_info(connection, user_vktinder_id):
     '''Функция получения информации о пользователях для выдачи в приложении. 
     Принимает на вход связь с БД т.е сессию(session) и возвращает список кортежей со всеми пользователями которые связаны с пользователем приложения'''
     querys = connection.query(SearhPair.searh_pair_name, SearhPair.searh_pair_surname, SearhPair.searh_pair_page_link,
-                              SearhPairPhoto.photo_1, SearhPairPhoto.photo_2, SearhPairPhoto.photo_3).join(SearhPair).join(UserVKTinder).filter(UserVKTinder.user_vk_id == user_vktinder_id).all()
+                              SearhPairPhoto.photo_1, SearhPairPhoto.photo_2, SearhPairPhoto.photo_3).join(
+        SearhPair).join(UserVKTinder).filter(UserVKTinder.user_vk_id == user_vktinder_id).all()
     # querys = querys.filter(UserVKTinder.user_vktinder_id == user_vktinder_id).all()
-    return iter(querys)
+    return querys
     session.close()
 
-def get_new_searh_pair_info(connection, user_vktinder_id):
+def get_new_searh_pair_info(connection, user_vk_id):
     '''для получения новых кандидатов после просмотра старых'''
-    querys = connection.query(SearhPair.searh_pair_name, SearhPair.searh_pair_surname,
-                                  SearhPair.searh_pair_page_link,
-                                  SearhPairPhoto.photo_1, SearhPairPhoto.photo_2, SearhPairPhoto.photo_3).join(
-        SearhPair).join(UserVKTinder).filter(UserVKTinder.user_vk_id == user_vktinder_id, SearhPair.attribute != 3).all()
-        # querys = querys.filter(UserVKTinder.user_vktinder_id == user_vktinder_id).all()
-    return iter(querys)
+    querys = connection.query(SearhPair.searh_pair_name, SearhPair.searh_pair_surname, SearhPair.searh_pair_page_link,
+                              SearhPairPhoto.photo_1, SearhPairPhoto.photo_2, SearhPairPhoto.photo_3).join(
+        SearhPair).join(UserVKTinder).filter(UserVKTinder.user_vk_id == user_vk_id, SearhPair.attribute == 0).all()
+    # querys = querys.filter(UserVKTinder.user_vktinder_id == user_vktinder_id).all()
+    return querys
 
 def generator_get_searh_pair_info(connection, user_vktinder_id):   # надо чтобы второй аргумент был айди в таблице
     '''Функция получения информации о пользователях для выдачи в приложении. (аналогична get_searh_pair_info )
