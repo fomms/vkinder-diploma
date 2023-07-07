@@ -44,20 +44,51 @@ class VKbot:
                 if msg == 'старт':
                     self.user_id = event.user_id
                     return
+                
+    # def get_info(self):  #метод получающий возраст поиска
+    #     self.send_message(message='Введите минимальный возраст партнёра:')
+    #     min_age = None
+    #     max_age = None
+    #     for event in self.longpoll.listen():
+    #         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
+    #             if min_age is None:
+    #                 min_age = event.text
+    #                 self.send_message(message='Введите максимальный возраст партнёра:')
+    #             else:
+    #                 max_age = event.text
+    #                 return min_age, max_age
 
-    def get_info(self):  #метод получающий возраст поиска
+    def get_min_age(self):  #метод получающий минимальный возраст поиска
         self.send_message(message='Введите минимальный возраст партнёра:')
         min_age = None
-        max_age = None
+        # max_age = None
         for event in self.longpoll.listen():
             if event.type == VkEventType.MESSAGE_NEW and event.to_me:
                 if min_age is None:
-                    min_age = event.text
-                    self.send_message(message='Введите максимальный возраст партнёра:')
-                else:
-                    max_age = event.text
-                    return min_age, max_age
-    
+                    try:
+                        int(event.text) 
+                        min_age = event.text
+                        return min_age
+                    except Exception:
+                        min_age = None
+                        self.send_message(message='Неверный формат:')
+                        return self.get_min_age()
+    def get_max_age(self):  #метод получающий максимальный возраст поиска
+        self.send_message(message='Введите максимальный возраст партнёра:')
+        # min_age = None
+        max_age = None
+        for event in self.longpoll.listen():
+            if event.type == VkEventType.MESSAGE_NEW and event.to_me:
+                if max_age is None:
+                    try:
+                        int(event.text)
+                        max_age = event.text
+                        return max_age
+                    except Exception:
+                        self.send_message(message='Неверный формат:')
+                        max_age = None
+                        return self.get_max_age()
+ 
     def get_sex(self):  #метод получающий пол человека для поиска
         self.send_message(message='Введите пол человека которого хотите найти(мужской\женский):')
         for event in self.longpoll.listen():
@@ -74,7 +105,3 @@ class VKbot:
                 city = event.text
                 self.send_message(message='Начинаем поиск...', keyboard=self.get_keyboard('button.json'))
                 return city
-
-
-
-

@@ -7,7 +7,9 @@ import time
 
 vkbot = VKbot(group_token)  # создаем экземляр класса бота
 vkbot.get_started()  # пускаем первый лонгпол который получает айди
-min_age, max_age = vkbot.get_info()  # получаем границы возраста
+# min_age, max_age = vkbot.get_info()  # получаем границы возраста
+min_age = vkbot.get_min_age()
+max_age = vkbot.get_max_age()
 sex = vkbot.get_sex()# получаем пол
 city = vkbot.get_city()  # получаем город
 vkapi = VKAPIusers(min_age, max_age, city, sex=1)  # создаем экземляр класса пользователей приложения для примененния к ним методов поиска
