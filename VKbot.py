@@ -45,18 +45,6 @@ class VKbot:
                     self.user_id = event.user_id
                     return
                 
-    # def get_info(self):  #метод получающий возраст поиска
-    #     self.send_message(message='Введите минимальный возраст партнёра:')
-    #     min_age = None
-    #     max_age = None
-    #     for event in self.longpoll.listen():
-    #         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-    #             if min_age is None:
-    #                 min_age = event.text
-    #                 self.send_message(message='Введите максимальный возраст партнёра:')
-    #             else:
-    #                 max_age = event.text
-    #                 return min_age, max_age
 
     def get_min_age(self):  #метод получающий минимальный возраст поиска
         self.send_message(message='Введите минимальный возраст партнёра:')
