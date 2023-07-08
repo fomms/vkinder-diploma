@@ -16,6 +16,7 @@ class UserVKTinder(Base):
     def __str__(self):
         return f'{self.user_vktinder_id}, {self.user_vk_id}, {self.user_vktinder_name}, {self.user_vktinder_surname}, {self.user_vktinder_age}'
 
+
 class SearhPair(Base):
     __tablename__ = 'SearhPair'
 

@@ -37,7 +37,6 @@ class VKbot:
             self.send_message(message=f'{candidate[0]} {candidate[1]} \n {candidate[2]} \n ',
                                attachment=','.join(candidate[3:5]))  # отправляем кандидата пользователю
 
-
     def get_started(self):  #метод начинающющий взаимодействие с человеком и получчающая его ID
         for event in self.longpoll.listen():
             if event.type == VkEventType.MESSAGE_NEW and event.to_me:
@@ -74,6 +73,7 @@ class VKbot:
                         min_age = None
                         self.send_message(message='Неверный формат:')
                         return self.get_min_age()
+
     def get_max_age(self):  #метод получающий максимальный возраст поиска
         self.send_message(message='Введите максимальный возраст партнёра:')
         # min_age = None

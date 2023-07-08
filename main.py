@@ -2,6 +2,7 @@ from vk_api.longpoll import VkEventType
 from db.db_in_get_info import *
 from tokens import group_token
 from iterator import PeopleIterator
+from VKbot import VKbot
 import time
 
 
@@ -43,13 +44,13 @@ for event in vkbot.longpoll.listen():
                 vkbot.send_message(message='Поиск дополнительных анкет.....')
                 vkapi.offset += 3  # необходимо выставлять значение равное количетсву первично найденных людей
                 search_users = vkapi.search_users()  # ищет новых людей с указанным отступом
-                if search_users == []:
+                if not search_users:
                     vkbot.send_message(message='Анкеты кончились, для изменения параметров поиска введите: старт', keyboard=vkbot.get_keyboard('dead_key.json'))
                     main_flag = True
                 else:
                     add_new(search_users, vkbot.user_id)  # добаляет новых людей в базу данных
                     new_pair = get_new_searh_pair_info(session, vkbot.user_id)  # извлекает непросмотренных людей из базы данных
-                    vkbot.send_message(message='Можете продолжить, нажав кнопку NEXT')
+                    # print(new_pair)                    vkbot.send_message(message='Можете продолжить, нажав кнопку NEXT')
 
         elif msg == 'ADD_TO_FAVOURITE':  # меняем в последнем кандидате параметр FAVOURITE
 

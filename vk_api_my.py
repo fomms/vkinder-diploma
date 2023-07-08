@@ -1,7 +1,6 @@
 import vk_api
 from tokens import access_token
-import os
-import time
+
 
 class VKAPIparent:
 
@@ -26,8 +25,8 @@ class VKAPIusers(VKAPIparent):
             'age_to': self.age_to,
             'hometown': self.city,
             'sex': self.sex,
-            'status': 1,
-            'count': 3,
+            'status': [1, 5, 6],
+            'count': 10,
             'has_photo': 1,
             'offset': self.offset
             }
@@ -64,15 +63,3 @@ class VKAPIusers(VKAPIparent):
             users_list.append(users_info)
         return users_list  #возвращает список пользователей
 
-
-# start = time.time()
-#
-# # access_token = os.getenv('access_token')
-# print(access_token)
-# vkapi = VKAPIusers(18, 20, 1, 1)
-# print(vkapi.search_users())
-# print(vkapi.get_vktinder_user())
-# print(vkapi.search_users())
-#
-# end = time.time()
-# print(end - start)
