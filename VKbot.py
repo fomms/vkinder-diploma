@@ -2,6 +2,7 @@ import vk_api
 from vk_api.longpoll import VkLongPoll, VkEventType
 from random import randrange
 
+
 class VKbot:
 
     def __init__(self, token):
@@ -94,6 +95,7 @@ class VKbot:
         for event in self.longpoll.listen():
             if event.type == VkEventType.MESSAGE_NEW and event.to_me:
                 sex = event.text
+                self.send_message(message='Начинаем поиск...', keyboard=self.get_keyboard('button.json'))
                 if sex.lower() == 'женский':
                     return 1
                 return 2
@@ -103,5 +105,4 @@ class VKbot:
         for event in self.longpoll.listen():
             if event.type == VkEventType.MESSAGE_NEW and event.to_me:
                 city = event.text
-                self.send_message(message='Начинаем поиск...', keyboard=self.get_keyboard('button.json'))
                 return city
