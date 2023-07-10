@@ -6,7 +6,6 @@ from vk_api_my import VKAPIusers
 from tokens import Password_db, Login_db, Name_db
 
 
-
 DSN = f"postgresql://{Login_db}:{Password_db}@localhost:5432/{Name_db}"
 engine = sqlalchemy.create_engine(DSN)  # Создание движка
 create_tables(engine)  # создание таблиц
