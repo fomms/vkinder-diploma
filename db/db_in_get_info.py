@@ -3,11 +3,9 @@ from sqlalchemy.orm import sessionmaker
 from db.models import create_tables
 from db.models import UserVKTinder, SearhPair, SearhPairPhoto
 from vk_api_my import VKAPIusers
-from tokens import Password_db
+from tokens import Password_db, Login_db, Name_db
 
 
-Login_db = 'postgres'
-Name_db = 'test'
 
 DSN = f"postgresql://{Login_db}:{Password_db}@localhost:5432/{Name_db}"
 engine = sqlalchemy.create_engine(DSN)  # Создание движка
