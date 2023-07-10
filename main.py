@@ -42,7 +42,7 @@ if __name__ == '__main__':
                     update_db_attribute(session, vkbot.user_id, last_one[2][17:], 3)  # помечает последнюю анкету как просмотренную
                 except StopIteration:
                     vkbot.send_message(message='Поиск дополнительных анкет.....')
-                    vkapi.offset += 3  # необходимо выставлять значение равное количетсву первично найденных людей
+                    vkapi.offset += 10  # необходимо выставлять значение равное количетсву первично найденных людей
                     search_users = vkapi.search_users()  # ищет новых людей с указанным отступом
                     if not search_users:
                         vkbot.send_message(message='Анкеты кончились, для изменения параметров поиска введите: старт', keyboard=vkbot.get_keyboard('dead_key.json'))
@@ -50,7 +50,8 @@ if __name__ == '__main__':
                     else:
                         add_new(search_users, vkbot.user_id)  # добаляет новых людей в базу данных
                         new_pair = get_new_searh_pair_info(session, vkbot.user_id)  # извлекает непросмотренных людей из базы данных
-                        # print(new_pair)                    vkbot.send_message(message='Можете продолжить, нажав кнопку NEXT')
+                        # print(new_pair)
+                        vkbot.send_message(message='Можете продолжить, нажав кнопку NEXT')
 
             elif msg == 'ADD_TO_FAVOURITE':  # меняем в последнем кандидате параметр FAVOURITE
 
